@@ -8,7 +8,7 @@ Use the [Arduino IDE](https://www.arduino.cc/en/software) to compile and send th
 
 _All scripts are tested on Arduino Mini Pro_
 
-Each script by default uses an IR sensor to be able to control the lights remotely.
+Each script by default uses an IR sensor to be able to control the lights remotely. Hence the [IRRemote](https://github.com/z3t0/Arduino-IRremote) library has to be installed to compile the scripts.
 
 List of the scripts:
  * [Ford Mustang lights](https://github.com/budnix/arduino-for-scale-models/tree/main/ford-mustang-lights)
