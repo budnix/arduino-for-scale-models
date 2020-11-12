@@ -10,6 +10,10 @@ _All scripts are tested on Arduino Mini Pro_
 
 Each script by default uses an IR sensor to be able to control the lights remotely.
 
+List of the scripts:
+ * [Ford Mustang lights](https://github.com/budnix/arduino-for-scale-models/tree/main/ford-mustang-lights)
+ * [General lights](https://github.com/budnix/arduino-for-scale-models/tree/main/general-lights)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
