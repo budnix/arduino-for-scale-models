@@ -1,4 +1,4 @@
-# Arduino Scripts for General lights (common for most car models)
+# Arduino Scripts for General (suitable for most car models)
 
 The scripts allows:
  * Turn on/off front and rear days lights.

@@ -1,4 +1,4 @@
-# Arduino Scripts for Ford Mustang lights
+# Arduino Scripts for Ford Mustang
 
 The scripts allows:
  * Turn on/off front and rear days lights.
