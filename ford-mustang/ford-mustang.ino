@@ -1,10 +1,12 @@
 #include <IRremote.h>
 
+// --- Put your own IR codes here
 const unsigned int LEFT_INDICATOR_SIGNAL = 0x8F1B3EA4;
 const unsigned int RIGHT_INDICATOR_SIGNAL = 0x53DEFA84;
 const unsigned int ALL_INDICATORS_SIGNAL = 0x5CA55E68;
 const unsigned int DAYS_LIGHTS_SIGNAL = 0x88748A00;
 const unsigned int STOP_LIGHTS_SIGNAL = 0x5577900; // Not implemented
+// ---
 
 const unsigned int FRONT_LEFT_INDICATOR_PIN = 4;
 const unsigned int FRONT_RIGHT_INDICATOR_PIN = 7;
@@ -21,7 +23,7 @@ unsigned long mainIndicatorsTimer = 0;
 unsigned long rearIndicatorsTimer = 0;
 unsigned int previousSignal = 0;
 byte ledStates[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-bool leftIndicatorState = false; 
+bool leftIndicatorState = false;
 bool rightIndicatorState = false;
 bool dayLightsState = false;
 bool indicatorsToggleTrigger = false;
@@ -60,7 +62,7 @@ void loop() {
       leftIndicatorState = true;
       rightIndicatorState = true;
     }
-    
+
   } else if (signal == LEFT_INDICATOR_SIGNAL) {
     if (signal == previousSignal) {
       leftIndicatorState = !leftIndicatorState;
@@ -70,9 +72,9 @@ void loop() {
       indicatorsToggleTrigger = true;
       leftIndicatorState = true;
     }
-    
+
     rightIndicatorState = false;
-    
+
   } else if (signal == RIGHT_INDICATOR_SIGNAL) {
     if (signal == previousSignal) {
       rightIndicatorState = !rightIndicatorState;
@@ -82,9 +84,9 @@ void loop() {
       indicatorsToggleTrigger = true;
       rightIndicatorState = true;
     }
-    
+
     leftIndicatorState = false;
-    
+
   } else if (signal == DAYS_LIGHTS_SIGNAL) {
     if (signal == previousSignal) {
       dayLightsState = !dayLightsState;
@@ -98,7 +100,7 @@ void loop() {
   } else {
     disableLeftIndicator();
   }
-  
+
   if (rightIndicatorState) {
     enableRightIndicator();
   } else {
@@ -115,10 +117,10 @@ void loop() {
 
   if (!indicatorsToggleTrigger && now - mainIndicatorsTimer >= INDICATORS_DELAY) {
     indicatorsToggleTrigger = true;
-    
+
     mainIndicatorsTimer = now;
   }
-  
+
   if (indicatorsToggleTrigger && now - mainIndicatorsTimer >= INDICATORS_DELAY) {
     indicatorsToggleTrigger = false;
 
@@ -153,21 +155,21 @@ void enableLeftIndicator() {
     for (byte i = 0; i < sizeof REAR_LEFT_INDICATOR_PIN; i++) {
       setLedState(REAR_LEFT_INDICATOR_PIN[i], 0);
     }
-    
+
     // Left indicator animation
     if (indicatorsToggleTrigger) {
       unsigned long now = millis();
-  
+
       if (rearIndicatorsTimer == 0) {
         rearIndicatorsTimer = now;
       }
-  
+
       setLedState(REAR_LEFT_INDICATOR_PIN[0], 1);
-  
+
       if (now - rearIndicatorsTimer >= INDICATORS_DELAY / 3) {
         setLedState(REAR_LEFT_INDICATOR_PIN[1], 1);
       }
-      
+
       if (now - rearIndicatorsTimer >= INDICATORS_DELAY / 1.5) {
         setLedState(REAR_LEFT_INDICATOR_PIN[2], 1);
       }
@@ -204,27 +206,27 @@ void enableRightIndicator() {
     for (byte i = 0; i < sizeof REAR_RIGHT_INDICATOR_PIN; i++) {
       setLedState(REAR_RIGHT_INDICATOR_PIN[i], 0);
     }
-      
+
     // Right indicator animation
     if (indicatorsToggleTrigger) {
       unsigned long now = millis();
-  
+
       if (rearIndicatorsTimer == 0) {
         rearIndicatorsTimer = now;
       }
-      
+
       setLedState(REAR_RIGHT_INDICATOR_PIN[0], 1);
-  
+
       if (now - rearIndicatorsTimer >= INDICATORS_DELAY / 3) {
         setLedState(REAR_RIGHT_INDICATOR_PIN[1], 1);
       }
-      
+
       if (now - rearIndicatorsTimer >= INDICATORS_DELAY / 1.5) {
         setLedState(REAR_RIGHT_INDICATOR_PIN[2], 1);
       }
     } else {
       rearIndicatorsTimer = 0;
-    }  
+    }
   }
 }
 
@@ -256,7 +258,7 @@ void enableDaysLight() {
   if (!rightIndicatorState) {
     for (byte i = 0; i < sizeof REAR_RIGHT_INDICATOR_PIN; i++) {
       setLedState(REAR_RIGHT_INDICATOR_PIN[i], 1);
-    } 
+    }
   }
 }
 
@@ -290,7 +292,7 @@ void setLedState(unsigned int pin, byte mode) {
  */
 double getIRSignal() {
   unsigned int signal = 0;
-  
+
   if (irrecv.decode(&signals)) {
     //Serial.println(signals.decode_type);
     Serial.print(F("IR code = 0x"));
@@ -299,8 +301,8 @@ double getIRSignal() {
     irrecv.blink13(false);
 
     signal = signals.value;
-    
-    irrecv.resume();  
+
+    irrecv.resume();
   }
 
   return signal;
