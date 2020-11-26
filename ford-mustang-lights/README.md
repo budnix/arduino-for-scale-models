@@ -1,7 +1,6 @@
 # Arduino Scripts for Ford Mustang
 
 ![](ford-mustang-gt.gif)
-
 (https://www.youtube.com/watch?v=4ME1MtxgZ0U)
 
 The scripts allows:
