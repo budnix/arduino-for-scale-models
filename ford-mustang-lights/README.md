@@ -1,6 +1,8 @@
 # Arduino Scripts for Ford Mustang
 
-https://www.youtube.com/watch?v=4ME1MtxgZ0U&feature=youtu.be
+![](ford-mustang-gt.gif)
+
+(https://www.youtube.com/watch?v=4ME1MtxgZ0U)
 
 The scripts allows:
  * Turn on/off front and rear days lights.
